@@ -28,7 +28,7 @@ int DFS(int parca[][SUTUN], int i, int j, int ziyaret[][SUTUN]) {
     return 1 +                                            // Dört yönde dolaşır ve komşu hücreleri kontrol eder.
 	DFS(parca, i + 1, j, ziyaret) +   // Güney
 	DFS(parca, i - 1, j, ziyaret) +   // Kuzey
-    DFS(parca, i, j + 1, ziyaret) +   // Doğu
+        DFS(parca, i, j + 1, ziyaret) +   // Doğu
 	DFS(parca, i, j - 1, ziyaret);    // Batı
 }
 
