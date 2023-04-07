@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-                            /* En Büyük Ada Yüzölçümü.m x n ikili matris olduğunu düşünün.ri 0 sa deniz, 1 se karayı ifade etmektedir. 
+                            /* En Büyük Ada Yüzölçümü.m x n ikili matris olduğunu düşünün.Bu matrisin değerleri 0 sa deniz, 1 se karayı ifade etmektedir. 
 	               Bir adanın alanı, adada 1 değerine sahip hücrelerin sayısıdır.Verilen matristeki bir adanın maksimum alanını döndürür. 
-				                   Ada yoksa 0 döndürür. */  
-				.   -
+				                            Ada yoksa 0 döndürür. */  
+				   
  // Isikay Çetin 1220505031             
 									      
 #define SATIR 5     // Satır ve sutun değerlerini kendimiz verdik kullanıcıdan almadık.
@@ -51,13 +51,13 @@ int maxAlanBul(int parca[][SUTUN]) {                    // Bu fonksiyon ise en b
 }
 
 int main() {
-    int parca[SATIR][SUTUN] ={{1, 1, 0, 0, 0},
+    int parca[SATIR][SUTUN] ={{1, 1, 0, 0, 0},                    // Bunları kendim girdim kullanıcıdan almadım.
                               {1, 1, 0, 0, 1},
                               {0, 1, 0, 1, 1},
                               {0, 1, 0, 0, 0},
 		              {1, 1, 0, 0, 1}, };
 
-    printf("En buyuk ada yuzolcumu: %d", maxAlanBul(parca));
+    printf("En buyuk adanin yuzolcumu: %d", maxAlanBul(parca));
 
     return 0;
 }
