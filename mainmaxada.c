@@ -1,59 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
-                                          
-                                          
-                     // Isikay Çetin 1220505031             
+                            /* En BÃ¼yÃ¼k Ada YÃ¼zÃ¶lÃ§Ã¼mÃ¼.m x n ikili matris olduÄŸunu dÃ¼ÅŸÃ¼nÃ¼n.ri 0 sa deniz, 1 se karayÄ± ifade etmektedir. 
+	               Bir adanÄ±n alanÄ±, adada 1 deÄŸerine sahip hÃ¼crelerin sayÄ±sÄ±dÄ±r.Verilen matristeki bir adanÄ±n maksimum alanÄ±nÄ± dÃ¶ndÃ¼rÃ¼r. 
+				                   Ada yoksa 0 dÃ¶ndÃ¼rÃ¼r. */  
+				.   -
+ // Isikay Ã‡etin 1220505031             
 									      
-#define SATIR 5     // Satır ve sutun değerlerini kendimiz verdik kullanıcıdan almadık.
+#define SATIR 5     // SatÄ±r ve sutun deÄŸerlerini kendimiz verdik kullanÄ±cÄ±dan almadÄ±k.
 #define SUTUN 5
 
-int max(int a, int b) {    // iki tamsayı paramtere olarak alır ve bunlardan büyük olan tam sayıyı döndürür.
+int max(int a, int b) {    // iki tamsayÄ± paramtere olarak alÄ±r ve bunlardan bÃ¼yÃ¼k olan tam sayÄ±yÄ± dÃ¶ndÃ¼rÃ¼r.
     if(a>b)
     return a;
     else 
     return b;
 }
-/* bir adadaki en büyük alanı bulmak için derinlik öncelikli arama (DFS) algoritmasını kullanıbdık.
-Bu işlev bir matris, iki tamsayı ve bir ziyaret edilmiş hücreler matrisi alır ve adadaki en büyük alanı hesaplar.*/
+/* bir adadaki en bÃ¼yÃ¼k alanÄ± bulmak iÃ§in derinlik Ã¶ncelikli arama (DFS) algoritmasÄ±nÄ± kullanÄ±bdÄ±k.
+Bu iÅŸlev bir matris, iki tamsayÄ± ve bir ziyaret edilmiÅŸ hÃ¼creler matrisi alÄ±r ve adadaki en bÃ¼yÃ¼k alanÄ± hesaplar.*/
  
 int DFS(int parca[][SUTUN], int i, int j, int ziyaret[][SUTUN]) {                            
-    if (i < 0 || i >= SATIR || j < 0 || j >= SUTUN || ziyaret[i][j] || !parca[i][j]) {       // Eğer koordinatlar geçersizse veya hücre denizse 0 döndür.
+    if (i < 0 || i >= SATIR || j < 0 || j >= SUTUN || ziyaret[i][j] || !parca[i][j]) {       // EÄŸer koordinatlar geÃ§ersizse veya hÃ¼cre denizse 0 dÃ¶ndÃ¼r.
         return 0;
     }
 
-    ziyaret[i][j] = 1;                      // ziyaret edilen hücre olarak hesaplanır.
+    ziyaret[i][j] = 1;                      // ziyaret edilen hÃ¼cre olarak hesaplanÄ±r.
                                                           
-    return 1 +                                            // Dört yönde dolaşır ve komşu hücreleri kontrol eder.
-	DFS(parca, i + 1, j, ziyaret) +   // Güney
+    return 1 +                                            // DÃ¶rt yÃ¶nde dolaÅŸÄ±r ve komÅŸu hÃ¼creleri kontrol eder.
+	DFS(parca, i + 1, j, ziyaret) +   // GÃ¼ney
 	DFS(parca, i - 1, j, ziyaret) +   // Kuzey
-    DFS(parca, i, j + 1, ziyaret) +   // Doğu
-	DFS(parca, i, j - 1, ziyaret);    // Batı
+    DFS(parca, i, j + 1, ziyaret) +   // DoÄŸu
+	DFS(parca, i, j - 1, ziyaret);    // BatÄ±
 }
 
-// En büyük adanın boyutunu hesaplayan ana fonksiyon
-int maxAlanBul(int parca[][SUTUN]) {                    // Bu fonksiyon ise en büyük olan adanın alanını hesaplar.
-    int maxAlan=0;           // ada büyüklüğü için değişken oluşturduk.
+// En bÃ¼yÃ¼k adanÄ±n boyutunu hesaplayan ana fonksiyon
+int maxAlanBul(int parca[][SUTUN]) {                    // Bu fonksiyon ise en bÃ¼yÃ¼k olan adanÄ±n alanÄ±nÄ± hesaplar.
+    int maxAlan=0;           // ada bÃ¼yÃ¼klÃ¼ÄŸÃ¼ iÃ§in deÄŸiÅŸken oluÅŸturduk.
     int i,j;
-    int ziyaret[SATIR][SUTUN] =  {0} ;                  // ziyaret edilen hücreleri takip etmek için matris oluşturulur.
+    int ziyaret[SATIR][SUTUN] =  {0} ;                  // ziyaret edilen hÃ¼creleri takip etmek iÃ§in matris oluÅŸturulur.
 
     for (i = 0; i < SATIR; i++) {
         for (j = 0; j < SUTUN; j++) {
-            if (parca[i][j] && !ziyaret[i][j]) {                    // 1 değerine sahip, ziyaret edilmemiş bir hücre bulunursa
+            if (parca[i][j] && !ziyaret[i][j]) {                    // 1 deÄŸerine sahip, ziyaret edilmemiÅŸ bir hÃ¼cre bulunursa
                 int alan = DFS(parca, i, j, ziyaret);
-                maxAlan = max(maxAlan, alan);     // adanın alanı hesaplanır.
+                maxAlan = max(maxAlan, alan);     // adanÄ±n alanÄ± hesaplanÄ±r.
             } 
         }
     }
 
-    return maxAlan;                                   // max alanı döndürür.
+    return maxAlan;                                   // max alanÄ± dÃ¶ndÃ¼rÃ¼r.
 }
 
 int main() {
-    int parca[SATIR][SUTUN] = {{1, 1, 0, 0, 0},
-                             {1, 1, 0, 0, 1},
-                             {0, 1, 0, 1, 1},
-                             {0, 1, 0, 0, 0},
-				     	     {1, 1, 0, 0, 1}, };
+    int parca[SATIR][SUTUN] ={{1, 1, 0, 0, 0},
+                              {1, 1, 0, 0, 1},
+                              {0, 1, 0, 1, 1},
+                              {0, 1, 0, 0, 0},
+		              {1, 1, 0, 0, 1}, };
 
     printf("En buyuk ada yuzolcumu: %d", maxAlanBul(parca));
 
